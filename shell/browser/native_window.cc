@@ -475,6 +475,10 @@ bool NativeWindow::AddTabbedWindow(NativeWindow* window) {
   return true;  // for non-Mac platforms
 }
 
+std::string NativeWindow::GetTabbingIdentifier() {
+  return "";  // for non-Mac platforms
+}
+
 void NativeWindow::SetVibrancy(const std::string& type) {
   vibrancy_ = type;
 }

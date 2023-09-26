@@ -1622,6 +1622,17 @@ bool NativeWindowMac::AddTabbedWindow(NativeWindow* window) {
   return true;
 }
 
+std::string NativeWindowMac::GetTabbingIdentifier() {
+  // An NSWindow generates a tabbing identifier by default from inherent
+  // window properties, such as the window class name, the delegate class
+  // name, the window controller class name, and some additional state.
+  bool tabbing_disallowed =
+      [window_ tabbingMode] == NSWindowTabbingModeDisallowed;
+  return tabbing_disallowed
+             ? ""
+             : base::SysNSStringToUTF8([window_ tabbingIdentifier]);
+}
+
 void NativeWindowMac::SetAspectRatio(double aspect_ratio,
                                      const gfx::Size& extra_size) {
   NativeWindow::SetAspectRatio(aspect_ratio, extra_size);
